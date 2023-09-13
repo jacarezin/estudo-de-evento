@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- CONFIGURAÇÃO -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatiple" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- DESCRIÇÃO -->
+    <meta name="description" content="Gerador de estudo de eventos baseado em regressão linear e retorno anormal" />
+    <!-- ICONES - NAVEGADOR/IOS/ANDROID -->
+    <!-- <link rel="icon" href="img/favicon-64.png" />
+    <link rel="apple-touch-icon" href="img/favicon 192.png" />
+    <link rel="manifest" href="manifest.webmanifest" /> -->
+    <!-- FONTES -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="css/styles.css" rel="stylesheet" />
+
+    <!-- TITULO SITE -->
+    <title>Gerador de Estudo de Eventos</title>
+  </head>
+  <body>
+    <div class="config">
+      <div class="h-f">
+      <div class="h1-ico">
+        <h1 class="p-h">Gerador de</br> Estudo de</br> Evento</h1>
+        <a class="info" href="#">i</a>
+      </div>
+      <form action="#">
+        <label for="acoes">Ações</label>
+        <select id="acoes" required>
+          <option value="IBOVESPA">Índice Bovespa B3 &#40;IBOVESPA&#41;</option>
+          <option value="IBRX100">Índice Brasil 100 &#40;IBrX 100&#41;</option>
+          <option value="IBRX50">Índice Brasil 50 &#40;IBrX 50&#41;</option>
+          <option value="IBRA">Índice Bovespa B3 &#40;IBrA B3&#41;</option>
+        </select>
+        <label for="janesti">Janela de Estimação<span> (dias)</span></label>
+        <input class="curto" id="janesti" type="number" value="252" max="365" min="" />
+        <label for="janev">Janela do Evento<span> (dias)</span></label>
+        <div class="janevinput">
+          <input id="janev" class="janev curto" type="number" value="5" max="30" />
+          <p>d0</p>
+          <input class="janev curto en" type="number" value="5" max="30" />
+        </div>
+        <div class="janevlin">
+        <div class="linha">
+          <div class="quadr"></div>
+          <div class="bola"></div>
+          <div class="quadr en"></div>
+        </div></div>
+        <label for="datas"
+          >Data dos Eventos<span> (separar com virgula)</span></label
+        >
+        <textarea id="datas" class="datas" type="text"></textarea>
+      </form>
+    </div>
+      <a class=btn-cont href="#"><button class="btn">Gerar estudo</button></a>
+    </div>
+    <div class="relat">
+      <header class="relat-head">
+        <div class="intervalos">
+        <p class="text-head">Intervalo de confiança:</p>
+        <div class="porcentagens">
+        <label id="checkbox" class="box-por">
+          <input type="checkbox" checked="checked"><span class="per">90&percnt;</span>
+        </label>
+        <label id="checkbox" class="box-por">
+          <input type="checkbox" checked="checked"><span class="per">95&percnt;</span>
+        </label>
+        <label id="checkbox" class="box-por">
+          <input type="checkbox" checked="checked"><span class="per">99&percnt;</span>
+        </label>
+      </div>
+      </div>
+        <div class="exportdiv">      
+          <!-- <a href="#" class="export times">Times New Roman</a> -->
+          <a href="#" class="export pdf">Exportar como .pdf</a>
+        </div>
+      </header>
+      <body class="tópicos">
+        <div class="section">
+        <div class="titulo"><span>&#62;</span>Dados</div>
+        <div class="conteudo">aaaa</div>
+      </div>
+      <div class="section open">
+        <div class="titulo "><span>&#62;</span>Regressão</div>
+        <div class="conteudo">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+      </div>
+      <div class="section">
+        <div class="titulo"><span>&#62;</span>Intervalo de Confiança</div>
+        <div class="conteudo">aaaa</div>
+      </div>
+      <div class="section">
+        <div class="titulo"><span>&#62;</span>Resumo</div>
+        <div class="conteudo"> aaaa</div>
+      </div>
+      </body>
+    </div>
+    <script>
+      const sectionEl = document.querySelectorAll(".section");
+
+      sectionEl.forEach((section) => {
+          section.addEventListener("click", ()=> {
+            section.classList.toggle("open");
+
+          })
+
+
+
+      })
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
