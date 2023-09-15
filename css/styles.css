@@ -184,6 +184,16 @@ select:hover,
 #caixa {
   border: none;
 }
+.bub {
+  display: none;
+}
+.invalido .bub {
+  display: block;
+}
+
+.invalido ul {
+  box-shadow: 0 0 0 1px rgb(170, 73, 73);
+}
 
 .full ul {
   background-color: #ebebeb;

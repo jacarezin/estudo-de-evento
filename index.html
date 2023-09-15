@@ -3,7 +3,7 @@
   <head>
     <!-- CONFIGURAÇÃO -->
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatiple" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- DESCRIÇÃO -->
@@ -80,13 +80,14 @@
           <!-- <label for="datas"
             >Data dos Eventos<span> (separar com virgula)</span></label
           > -->
-          <label for="datas"
+          <label for="caixa"
             >Data dos Eventos<span> (separar com virgula)</span>
             <div id="data" class="datas">
               <ul>
                 <input id="caixa" type="text" />
               </ul>
               <div class="bob">Limite máximo atingido! (30/30)</div>
+              <div class="bub">Data inválida! Utilize o formato dd/mm/yyyy</div>
             </div>
           </label>
         </form>
@@ -98,18 +99,21 @@
         <div class="intervalos">
           <p class="text-head">Intervalo de confiança:</p>
           <div class="porcentagens">
-            <label id="checkbox" class="box-por">
-              <input type="checkbox" checked="checked" /><span class="per"
+            <label for="n90" id="checkbox" class="box-por">
+              <input id="n90" type="checkbox" checked="checked" /><span
+                class="per"
                 >90&percnt;</span
               >
             </label>
-            <label id="checkbox" class="box-por">
-              <input type="checkbox" checked="checked" /><span class="per"
+            <label for="n95" id="checkbox" class="box-por">
+              <input id="n95" type="checkbox" checked="checked" /><span
+                class="per"
                 >95&percnt;</span
               >
             </label>
-            <label id="checkbox" class="box-por">
-              <input type="checkbox" checked="checked" /><span class="per"
+            <label for="n99" id="checkbox" class="box-por">
+              <input id="n99" type="checkbox" checked="checked" /><span
+                class="per"
                 >99&percnt;</span
               >
             </label>
@@ -120,7 +124,7 @@
           <a href="#" class="export pdf">Exportar como .pdf</a>
         </div>
       </header>
-      <body class="tópicos">
+      <div class="tópicos">
         <div class="section">
           <div class="titulo"><span>&#62;</span>Dados</div>
           <div class="conteudo">aaaa</div>
@@ -145,9 +149,9 @@
           <div class="titulo"><span>&#62;</span>Resumo</div>
           <div class="conteudo">aaaa</div>
         </div>
-      </body>
+      </div>
     </div>
 
-    <script defer src="js/js front/general.js"></script>
+    <script type="module" src="js/front/generafrontl.js"></script>
   </body>
 </html>

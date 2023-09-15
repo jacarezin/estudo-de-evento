@@ -26,27 +26,46 @@ function remove(element, tag) {
   checkAndApplyFullClass();
 }
 // ADICIONA TAG E CHAMA "createtag"
-function addTag(e) {
-  if (e.key === "Enter" || e.key === ",") {
-    e.preventDefault();
-    let tagInput = e.target;
-    let tagValue = tagInput.value.trim();
+// function addTag(e) {
+//   if (e.key === "Enter" || e.key === ",") {
+//     let tagInput = input;
+//     let tagValue = tagInput.value.trim();
 
-    if (tagValue) {
-      let tagsToAdd = tagValue.split(",");
-      tagsToAdd.forEach((tag) => {
-        tag = tag.trim();
-        if (tag.length > 0 && !tags.includes(tag) && tags.length < 30) {
-          tags.push(tag);
-          // console.log(tags);
-          createTag();
-        }
-      });
-    }
-    tagInput.value = "";
+//     if (tagValue) {
+//       let tagsToAdd = tagValue.split(",");
+//       tagsToAdd.forEach((tag) => {
+//         tag = tag.trim();
+//         if (tag.length > 0 && !tags.includes(tag) && tags.length < 30) {
+//           tags.push(tag);
+//           // console.log(tags);
+//           createTag();
+//         }
+//       });
+//     }
+//     tagInput.value = "";
 
-    checkAndApplyFullClass();
+//     checkAndApplyFullClass();
+//   }
+// }
+
+function adicionartag() {
+  let tagInput = input;
+  let tagValue = tagInput.value.trim();
+
+  if (tagValue) {
+    let tagsToAdd = tagValue.split(",");
+    tagsToAdd.forEach((tag) => {
+      tag = tag.trim();
+      if (tag.length > 0 && !tags.includes(tag) && tags.length < 30) {
+        tags.push(tag);
+        // console.log(tags);
+        createTag();
+      }
+    });
   }
+  tagInput.value = "";
+
+  checkAndApplyFullClass();
 }
 
 // BACKSPACE E DELETE SELECIONAM E APAGAM ÚLTIMO ITEM
@@ -118,6 +137,64 @@ function checkAndApplyFullClass() {
   }
 }
 input.addEventListener("keyup", addTag);
+
+/////////////////////
+//////   DATA
+////////////////////
+function isValidDate(day, month, year) {
+  const date = new Date(`${year}-${month}-${day}`);
+  return !isNaN(date.getTime());
+}
+
+// Função para verificar se um texto é uma data válida
+function isDate(text) {
+  const parts = text.split("/");
+  if (parts.length !== 3) {
+    return false;
+  }
+
+  const [day, month, year] = parts;
+  return isValidDate(day, month, year);
+}
+
+function addTag(e) {
+  let tagInput = input;
+  let tagValue = tagInput.value.trim();
+
+  // Remove a classe .invalido se for uma data válida
+
+  if (e.key === "Enter" || e.key === ",") {
+    if (!isDate(tagValue) && tagValue.length > 0) {
+      // Se não for uma data válida, aplica a classe .invalido ao input
+      document.querySelector("#data").classList.add("invalido");
+      return; // Não faz nada mais se for uma data inválida
+    }
+    document.querySelector("#data").classList.remove("invalido");
+
+    if (isDate(tagValue)) {
+      // Verifica se é uma data válida
+      let tagsToAdd = tagValue.split(",");
+      tagsToAdd.forEach((tag) => {
+        tag = tag.trim();
+        if (tag.length > 0 && !tags.includes(tag) && tags.length < 30) {
+          tags.push(tag);
+          // console.log(tags);
+          createTag();
+        }
+      });
+    }
+    tagInput.value = "";
+
+    checkAndApplyFullClass();
+  }
+}
+
+// Remove todos os caracteres não numéricos
+
+// function isValidDate(day, month, year) {
+//   const date = new Date(`${year}-${month}-${day}`);
+//   return !isNaN(date.getTime());
+// }
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////               LADO RESULTADO                /////////////
