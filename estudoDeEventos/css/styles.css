@@ -98,7 +98,7 @@ select {
 }
 input:hover,
 select:hover,
-.datas:hover {
+.datas ul:hover {
   border: 1px solid #797979;
 }
 .curto {
@@ -132,22 +132,80 @@ select:hover,
   height: 12rem;
   width: 12rem;
 }
-
 .datas {
-  border: 1px solid #aaaaaa;
+  width: 358rem;
+}
+
+.datas ul {
   color: #444444;
-  min-height: 80rem;
-  vertical-align: top;
-  padding-top: 12px;
-  padding-left: 11rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10rem;
   margin-bottom: 12rem;
-  resize: vertical;
-  font-size: 16rem;
+  background-color: #fff;
+  padding: 11rem;
+  border: 1px solid #aaaaaa;
+  transition: all 0.3s;
 }
-.datas:focus {
+.datas ul li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  background-color: #f1f1f1;
+  padding: 5rem 8rem 5rem 10rem;
+  margin: 4rem 3rem;
+  border: 1px solid #aaaaaa;
+  overflow: hidden;
+}
+.datas ul li div {
+  width: 24rem;
+
+  font-size: 24rem;
+  color: #aaaaaa;
+  cursor: pointer;
+  margin-left: 4rem;
+  background-color: #f1f1f1;
+  justify-content: center;
+  text-align: center;
+  vertical-align: baseline;
+}
+.datas ul input {
+  flex: 1;
   outline: none;
-  border: 2px solid #000;
+  padding: 6rem;
+  margin: 4rem 3rem;
+  transition: all 0.3s;
 }
+.datas ul input:disabled {
+  background-color: #ebebeb;
+  height: 0;
+  font-size: 0;
+}
+#caixa {
+  border: none;
+}
+
+.full ul {
+  background-color: #ebebeb;
+  border: 1px solid #777;
+}
+
+.focusdel {
+  border: 1px solid #000 !important;
+}
+/* .full ul input {
+  height: 0.001rem;
+  font-size: 0.001rem;
+  background-color: #ebebeb;
+} */
+
+.bob {
+  display: none;
+}
+.full .bob {
+  display: block;
+}
+
 form {
   display: grid;
 }
