@@ -2,9 +2,8 @@
 const ulEl = document.querySelector("ul"),
   input = ulEl.querySelector("input");
 
-input.addEventListener("keydown", focustag);
-
 let tags = [];
+
 // CRIA A TAG NO ELEMENTO
 function createTag() {
   ulEl.querySelectorAll("li").forEach((li) => li.remove());
@@ -17,42 +16,14 @@ function createTag() {
       ulEl.insertAdjacentHTML("afterbegin", liTag);
     });
 }
-// REMOVE TAG
-function remove(element, tag) {
-  let index = tags.indexOf(tag);
-  tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
-  element.parentElement.remove();
 
-  checkAndApplyFullClass();
-}
-// ADICIONA TAG E CHAMA "createtag"
-// function addTag(e) {
-//   if (e.key === "Enter" || e.key === ",") {
-//     let tagInput = input;
-//     let tagValue = tagInput.value.trim();
-
-//     if (tagValue) {
-//       let tagsToAdd = tagValue.split(",");
-//       tagsToAdd.forEach((tag) => {
-//         tag = tag.trim();
-//         if (tag.length > 0 && !tags.includes(tag) && tags.length < 30) {
-//           tags.push(tag);
-//           // console.log(tags);
-//           createTag();
-//         }
-//       });
-//     }
-//     tagInput.value = "";
-
-//     checkAndApplyFullClass();
-//   }
-// }
-
-function adicionartag() {
+// CRIA A TAG NA ARRAY
+function addTag(e) {
   let tagInput = input;
   let tagValue = tagInput.value.trim();
 
-  if (tagValue) {
+  if ((e.key === "Enter" || e.key === ",") && tagValue.length > 0) {
+    // Verifica se é uma data válida
     let tagsToAdd = tagValue.split(",");
     tagsToAdd.forEach((tag) => {
       tag = tag.trim();
@@ -62,15 +33,95 @@ function adicionartag() {
         createTag();
       }
     });
+  } else {
+    // Se não for uma data válida, aplica a classe .invalido ao input
+    document.querySelector("#caixa").classList.add("invalido");
+    return; // Não faz nada mais se for uma data inválida
   }
+
+  // Remove a classe .invalido se for uma data válida
+  tagInput.classList.remove("invalido");
   tagInput.value = "";
 
   checkAndApplyFullClass();
 }
 
-// BACKSPACE E DELETE SELECIONAM E APAGAM ÚLTIMO ITEM
-let isElementWithFocusDel = false;
+// Mesma de cima mas pra ser acionada no console
 
+// function adicionartag() {
+//   let tagInput = input;
+//   let tagValue = tagInput.value.trim();
+
+//   if (tagValue) {
+//     let tagsToAdd = tagValue.split(",");
+//     tagsToAdd.forEach((tag) => {
+//       tag = tag.trim();
+//       if (tag.length > 0 && !tags.includes(tag) && tags.length < 30) {
+//         tags.push(tag);
+//         // console.log(tags);
+//         createTag();
+//       }
+//     });
+//   }
+//   tagInput.value = "";
+
+//   checkAndApplyFullClass();
+// }
+
+//checa data
+
+// if (!isDate(tagValue) && tagValue.length > 0) {
+//   // Se não for uma data válida, aplica a classe .invalido ao input
+//   document.querySelector("#data").classList.add("invalido");
+//   return; // Não faz nada mais se for uma data inválida
+// }
+// document.querySelector("#data").classList.remove("invalido");
+
+// if (isDate(tagValue)) {
+// //  DATA
+// function isValidDate(day, month, year) {
+//   const date = new Date(`${year}-${month}-${day}`);
+//   return !isNaN(date.getTime());
+// }
+
+// // Função para verificar se um texto é uma data válida
+// function isDate(text) {
+//   const parts = text.split("/");
+//   if (parts.length !== 3) {
+//     return false;
+//   }
+
+//   const [day, month, year] = parts;
+//   return isValidDate(day, month, year);
+// }
+
+// NÃO PERMITE !0-9 / ,
+input.addEventListener("input", function (e) {
+  const inputValue = e.target.value;
+  const sanitizedValue = inputValue.replace(/[^0-9/,]/g, ""); // Remove todos os caracteres que não são números ou "/"
+
+  if (inputValue !== sanitizedValue) {
+    // Se o valor foi alterado devido à remoção de caracteres inválidos
+    e.target.value = sanitizedValue; // Atualiza o valor do campo com o valor sanitizado
+  }
+});
+
+/////////////////////////////////////////////////////////////////////
+///////////// "não" atrapalham   ////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+// REMOVE TAG
+function remove(element, tag) {
+  let index = tags.indexOf(tag);
+  tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+  element.parentElement.remove();
+
+  checkAndApplyFullClass();
+}
+
+// FOCUS TAG
+let isElementWithFocusDel = false;
+input.addEventListener("keydown", focustag);
 function focustag(e) {
   if (tags.length > 0) {
     if (
@@ -137,64 +188,6 @@ function checkAndApplyFullClass() {
   }
 }
 input.addEventListener("keyup", addTag);
-
-/////////////////////
-//////   DATA
-////////////////////
-function isValidDate(day, month, year) {
-  const date = new Date(`${year}-${month}-${day}`);
-  return !isNaN(date.getTime());
-}
-
-// Função para verificar se um texto é uma data válida
-function isDate(text) {
-  const parts = text.split("/");
-  if (parts.length !== 3) {
-    return false;
-  }
-
-  const [day, month, year] = parts;
-  return isValidDate(day, month, year);
-}
-
-function addTag(e) {
-  let tagInput = input;
-  let tagValue = tagInput.value.trim();
-
-  // Remove a classe .invalido se for uma data válida
-
-  if (e.key === "Enter" || e.key === ",") {
-    if (!isDate(tagValue) && tagValue.length > 0) {
-      // Se não for uma data válida, aplica a classe .invalido ao input
-      document.querySelector("#data").classList.add("invalido");
-      return; // Não faz nada mais se for uma data inválida
-    }
-    document.querySelector("#data").classList.remove("invalido");
-
-    if (isDate(tagValue)) {
-      // Verifica se é uma data válida
-      let tagsToAdd = tagValue.split(",");
-      tagsToAdd.forEach((tag) => {
-        tag = tag.trim();
-        if (tag.length > 0 && !tags.includes(tag) && tags.length < 30) {
-          tags.push(tag);
-          // console.log(tags);
-          createTag();
-        }
-      });
-    }
-    tagInput.value = "";
-
-    checkAndApplyFullClass();
-  }
-}
-
-// Remove todos os caracteres não numéricos
-
-// function isValidDate(day, month, year) {
-//   const date = new Date(`${year}-${month}-${day}`);
-//   return !isNaN(date.getTime());
-// }
 
 //////////////////////////////////////////////////////////////////////////
 ////////////////               LADO RESULTADO                /////////////
