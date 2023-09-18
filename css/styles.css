@@ -136,6 +136,15 @@ select:hover,
   width: 358rem;
 }
 
+.caixalab {
+  display: flex;
+  justify-content: space-between;
+}
+#num30 {
+  color: #222;
+  font-size: 14rem;
+}
+
 .datas ul {
   color: #444444;
   display: flex;

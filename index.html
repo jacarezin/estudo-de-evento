@@ -49,7 +49,9 @@
             <option value="IBRX50">Índice Brasil 50 &#40;IBrX 50&#41;</option>
             <option value="IBRA">Índice Bovespa B3 &#40;IBrA B3&#41;</option>
           </select>
-          <label for="janesti">Janela de Estimação<span> (dias)</span></label>
+          <label for="janesti"
+            >Janela de Estimação<span> &#40;dias&#41;</span></label
+          >
           <input
             class="curto"
             id="janesti"
@@ -58,7 +60,9 @@
             max="365"
             min=""
           />
-          <label for="janev">Janela do Evento<span> (dias)</span></label>
+          <label for="janev"
+            >Janela do Evento<span> &#40;dias&#41;</span></label
+          >
           <div class="janevinput">
             <input
               id="janev"
@@ -80,13 +84,18 @@
           <!-- <label for="datas"
             >Data dos Eventos<span> (separar com virgula)</span></label
           > -->
-          <label for="caixa"
-            >Data dos Eventos<span> (separar com virgula)</span>
+          <label for="caixa">
+            <div class="caixalab">
+              <div>
+                Data dos Eventos<span> &#40;separar com virgulas&#41;</span>
+              </div>
+              <div id="num30">&#40;<span id="num30">0</span>/30&#41;</div>
+            </div>
             <div id="data" class="datas">
               <ul>
                 <input id="caixa" type="text" />
               </ul>
-              <div class="bob">Limite máximo atingido! (30/30)</div>
+              <div class="bob">Limite máximo atingido! &#40;30/30s&#41;</div>
               <div class="bub">Data inválida! Utilize o formato dd/mm/yyyy</div>
             </div>
           </label>

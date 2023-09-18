@@ -4,6 +4,30 @@ const ulEl = document.querySelector("ul"),
 
 let tags = [];
 
+//DATA
+
+function isValidDate(dia, mes, ano) {
+  const currentYear = new Date().getFullYear().toString();
+
+  const diasNoMes = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  if (ano.toString().length !== 4 || ano < 1000 || ano > currentYear) {
+    return false;
+  }
+
+  if (ano % 400 === 0 || (ano % 4 === 0 && ano % 100 !== 0)) {
+    diasNoMes[2] = 29;
+  }
+
+  if (mes < 1 || mes > 12 || dia < 1) {
+    return false;
+  } else if (dia > diasNoMes[mes]) {
+    return false;
+  }
+
+  return true;
+}
+
 // CRIA A TAG NO ELEMENTO
 function createTag() {
   ulEl.querySelectorAll("li").forEach((li) => li.remove());
@@ -19,8 +43,9 @@ function createTag() {
 
 // CRIA A TAG NA ARRAY
 function addTag(e) {
-  let tagInput = input;
+  let tagInput = document.querySelector("#caixa");
   let tagValue = tagInput.value.trim();
+  let hasInvalidDate = false; // Variável de controle para verificar se há datas inválidas
 
   if ((e.key === "Enter" || e.key === ",") && tagValue.length > 0) {
     // Verifica se é uma data válida
@@ -28,23 +53,27 @@ function addTag(e) {
     tagsToAdd.forEach((tag) => {
       tag = tag.trim();
       if (tag.length > 0 && !tags.includes(tag) && tags.length < 30) {
-        tags.push(tag);
-        // console.log(tags);
-        createTag();
+        const [day, month, year] = tag.split("/");
+        if (!isValidDate(parseInt(day), parseInt(month), parseInt(year))) {
+          // Marca que há pelo menos uma data inválida
+          hasInvalidDate = true;
+          document.querySelector(".datas").classList.add("invalido");
+        } else {
+          // Data válida, adiciona a tag
+          tags.push(tag);
+          createTag();
+          document.querySelector(".datas").classList.remove("invalido");
+          tagInput.value = "";
+        }
       }
     });
-  } else {
-    // Se não for uma data válida, aplica a classe .invalido ao input
-    document.querySelector("#caixa").classList.add("invalido");
-    return; // Não faz nada mais se for uma data inválida
   }
-
-  // Remove a classe .invalido se for uma data válida
-  tagInput.classList.remove("invalido");
-  tagInput.value = "";
 
   checkAndApplyFullClass();
 }
+
+// Adicione um ouvinte de evento 'keyup' para chamar a função addTag
+document.querySelector("#caixa").addEventListener("keyup", addTag);
 
 // Mesma de cima mas pra ser acionada no console
 
@@ -179,6 +208,9 @@ document.addEventListener("click", function (e) {
 
 // CHECA LIMITE
 function checkAndApplyFullClass() {
+  let contador = document.querySelector("#num30 span");
+  contador.textContent = tags.length.toString();
+
   if (tags.length >= 30) {
     document.querySelector(".datas").classList.add("full");
     document.querySelector(".datas").querySelector("input").disabled = true;
