@@ -228,8 +228,10 @@ input.addEventListener("keyup", addTag);
 // Abre e fecha tópicos
 const sectionEl = document.querySelectorAll(".section");
 
-sectionEl.forEach((section) => {
-  section.addEventListener("click", () => {
-    section.classList.toggle("open");
-  });
+sectionEl.forEach((ev) => {
+  ev.addEventListener("click", open(ev));
 });
+
+function open(ev) {
+  ev.classList.toggle("open");
+}
