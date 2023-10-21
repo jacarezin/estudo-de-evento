@@ -167,6 +167,7 @@ function LinhaJE() {
 }
 
 function CaixaJE() {
+  const format = "dd/mm/aaaa";
   const isValidDate = (data) => {
     const dia = parseInt(data.split("/")[0]),
       mes = parseInt(data.split("/")[1]),
@@ -219,6 +220,12 @@ function CaixaJE() {
       e.target.value = dataerrada;
     }
   };
+  // invalidando
+  // const [btnState, setBtnState] = useState(false);
+  // function invalidar() {
+  //   setBtnState((btnState) => !btnState);
+  // }
+  // let toogle = btnState ? " invalido" : "";
 
   return (
     <label htmlFor="caixa">
@@ -244,13 +251,11 @@ function CaixaJE() {
             id="caixa"
             type="text"
             onKeyUp={addTag}
-            placeholder={
-              contagem > 2 ? "" : "dd/mm/aaaa, dd/mm/aaaa, dd/mm/aaaa"
-            }
+            placeholder={contagem > 2 ? "" : `${format}, ${format}, ${format}`}
           />
         </ul>
         <div className="bob">Limite máximo atingido! &#40;30/30s&#41;</div>
-        <div className="bub">Data inválida! Utilize o formato dd/mm/yyyy</div>
+        <div className="bub">Data inválida! Utilize o formato {format}</div>
       </div>
     </label>
   );
