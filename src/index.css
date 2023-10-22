@@ -47,7 +47,6 @@ body,
   padding-left: 48rem;
   padding-right: 32rem;
   height: 100%;
-  overflow-y: auto;
 }
 .h1-ico {
   display: flex;

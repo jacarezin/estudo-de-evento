@@ -200,7 +200,6 @@ function CaixaJE() {
     setTags(tags.filter((_, index) => index !== indexToRemove));
   };
   let contagem = tags.length;
-
   const addTag = (e) => {
     if (e.key === "Enter" || e.key === ",") {
       const newtags = [];
@@ -208,15 +207,11 @@ function CaixaJE() {
       const possi = e.target.value;
       const possiveis = possi.split(",");
       possiveis.map((cand) => {
-        if (contagem >= 30) {
-          console.log("lotado");
-        } else {
-          if (!tags.includes(cand) && isValidDate(cand)) {
-            newtags.push(cand);
-          }
-          if (!tags.includes(cand) && !isValidDate(cand)) {
-            dataerrada.push(cand.trim());
-          }
+        if (!tags.includes(cand) && isValidDate(cand)) {
+          newtags.push(cand);
+        }
+        if (!tags.includes(cand) && !isValidDate(cand)) {
+          dataerrada.push(cand.trim());
         }
       });
       setTags([...tags, ...newtags]);
@@ -229,7 +224,6 @@ function CaixaJE() {
   //   setBtnState((btnState) => !btnState);
   // }
   // let toogle = btnState ? " invalido" : "";
-  // if contagem = false;
 
   return (
     <label htmlFor="caixa">
@@ -246,7 +240,7 @@ function CaixaJE() {
           {tags.map((tag, index) => (
             <li key={index}>
               {tag}{" "}
-              <div className="icone" onClick={() => removeTag(index)}>
+              <div clasNames="icone" onClick={() => removeTag(index)}>
                 &#x00d7;
               </div>
             </li>
@@ -348,8 +342,6 @@ function Topico({ topObj }) {
     </div>
   );
 }
-
-//
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
